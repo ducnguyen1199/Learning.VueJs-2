@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>{{title}}</h1>
+    <div id="root">
+      <h1>{{title}}</h1>
+      <p>{{say()}}</p>
+      <a v-bind:href="fb.url" v-bind:target="fb.target">{{fb.url}}</a><br />
+      <!-- shorthand: v-bind:attr  → :attr -->
+
+      <span>{{gender ? "man" : "girl"}}</span>
+      <p>{{formatName()}}</p>
+      <button v-on:click="upCount">click me</button> : <span>{{count}}</span>
+      <button v-on:click="logEvent($event)">logEvent</button>
+      <!-- shorthand: v-on:event  → @event -->
+
+      <form @submit.prevent="onSubmit">
+        <button type="submit">submit</button>
+      </form>
+      <!-- .prevent <=> e.preventDefault -->
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script>
+    const vueModel = new Vue({
+      el: "#root",
+      data: {
+        title: "NguyenCongDuc",
+        fb: { url: "http://facebook.com", target: "_blank" },
+        gender: true,
+        count: 0,
+      },
+      methods: {
+        say: () => "hello world!",
+        formatName() {
+          return this.title.toUpperCase();
+        },
+        upCount(e) {
+          console.log(e);
+          this.count++;
+        },
+        logEvent(e) {
+          console.log(e);
+        },
+        onSubmit() {},
+      },
+    });
+  </script>
+</html>
